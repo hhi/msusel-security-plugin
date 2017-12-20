@@ -1,0 +1,156 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>edu.montana.gsoc.msusel.sonar</groupId>
+	<artifactId>msusel-security-plugin</artifactId>
+	<packaging>sonar-plugin</packaging>
+    <version>${msusel.version}</version>
+	<name>MSUSEL Security Plugin</name>
+	<organization>
+		<name>MSUSEL</name>
+		<url>https://msusel.github.io</url>
+	</organization>
+
+	<description>MSUSEL SonarQube Quamoco Analytics</description>
+
+	<licenses>
+		<license>
+			<name>The MIT License (MIT)</name>
+			<url>https://opensource.org/licenses/mit-license.php</url>
+			<distribution></distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>david.rice</id>
+			<name>David Rice</name>
+			<email>davidrice363@gmail.com</email>
+			<organization>MSUSEL</organization>
+			<organizationUrl>https://msusel.github.io/</organizationUrl>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<sonar.buildVersion>5.6</sonar.buildVersion>
+		<jdk.min.version>1.8</jdk.min.version>
+		<msusel.version>1.1.1</msusel.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.sonarsource.sonarqube</groupId>
+			<artifactId>sonar-plugin-api</artifactId>
+			<scope>provided</scope>
+			<version>${sonar.buildVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+			<version>4.12</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.montana.gsoc.msusel</groupId>
+			<artifactId>msusel-codetree</artifactId>
+			<version>${msusel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.montana.gsoc.msusel.quamoco</groupId>
+			<artifactId>msusel-quamoco</artifactId>
+			<version>${msusel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.montana.gsoc.msusel.parsers</groupId>
+			<artifactId>msusel-csharp-parser</artifactId>
+			<version>${msusel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.montana.gsoc.msusel</groupId>
+			<artifactId>msusel-metrics</artifactId>
+			<version>${msusel.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+				<artifactId>sonar-packaging-maven-plugin</artifactId>
+				<version>1.17</version>
+				<extensions>true</extensions>
+				<configuration>
+					<pluginKey>msuselsecurity</pluginKey>
+					<pluginClass>edu.montana.gsoc.msusel.sonar.quamoco.QuamocoSecurityPlugin</pluginClass>
+					<pluginName>MSUSEL Security Plugin</pluginName>
+					<pluginDescription>Testing How to Deploy a Plugin</pluginDescription>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${jdk.min.version}</source>
+					<target>${jdk.min.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.2.1</version>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<extensions>
+			<extension>
+				<groupId>ar.com.synergian</groupId>
+				<artifactId>wagon-git</artifactId>
+				<version>0.2.5</version>
+			</extension>
+		</extensions>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>msusel-maven-repo</id>
+			<name>msusel-maven-repo</name>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+
+			<url>git:releases://git@github.com:MSUSEL/msusel-maven-repo.git</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>synergian-repo</id>
+			<url>https://raw.github.com/synergian/wagon-git/releases</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<distributionManagement>
+		<repository>
+			<id>msusel-maven-repo</id>
+			<name>msusel-maven-repo</name>
+			<url>git:releases://git@github.com:MSUSEL/msusel-maven-repo.git</url>
+		</repository>
+	</distributionManagement>
+</project>

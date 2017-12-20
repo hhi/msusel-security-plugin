@@ -1,0 +1,1 @@
+INDEX VERSION 1.129+C:\Users\c46q812\Documents\LocalRepository\MSUSEL\msusel-security-plugin\.metadata\.plugins\org.eclipse.jdt.core
