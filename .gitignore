@@ -5,7 +5,7 @@
 .classpath
 .project
 .settings/
-.metadata/
+.metadata/*
 bin/
 tmp/
 *.tmp
