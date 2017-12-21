@@ -32,10 +32,6 @@ import java.util.List;
 
 import org.sonar.api.Plugin;
 
-import edu.montana.gsoc.msusel.sonar.quamoco.profiles.QuamocoJavaProfile;
-import edu.montana.gsoc.msusel.sonar.quamoco.profiles.QuamocoProfileImporter;
-import edu.montana.gsoc.msusel.sonar.quamoco.sensor.QuamocoCSharpSensor;
-import edu.montana.gsoc.msusel.sonar.quamoco.sensor.QuamocoJavaSensor;
 
 /**
  * SonarQube analysis Plugin metadata class. This class identifies the plugin
@@ -51,12 +47,11 @@ public class QuamocoSecurityPlugin implements Plugin {
     /**
      * @return List of extension classes defined in this plugin
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public List getExtensions()
     {
         List extensions = new ArrayList();
-        extensions.addAll(asList(QuamocoMetrics.class, QuamocoMeasureComputer.class, QuamocoProfileImporter.class,
-                QuamocoJavaProfile.class, QuamocoJavaSensor.class, QuamocoCSharpSensor.class));
+        extensions.addAll(asList(QuamocoSecurityMeasureComputer.class));
 
         return extensions;
     }

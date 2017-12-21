@@ -3,8 +3,9 @@
 
 # Eclipse
 .classpath
-.project
 .settings/
+.metadata
+.metadata/
 .metadata/*
 bin/
 tmp/
